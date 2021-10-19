@@ -1,0 +1,101 @@
+{
+  "version": 2,
+  "projects": {
+    "herbalife-blog": {
+      "root": "apps/herbalife-blog",
+      "sourceRoot": "apps/herbalife-blog",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/herbalife-blog",
+            "outputPath": "dist/apps/herbalife-blog"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "herbalife-blog:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "herbalife-blog:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "herbalife-blog:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/herbalife-blog"],
+          "options": {
+            "jestConfig": "apps/herbalife-blog/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/herbalife-blog/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "herbalife-blog-e2e": {
+      "root": "apps/herbalife-blog-e2e",
+      "sourceRoot": "apps/herbalife-blog-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/herbalife-blog-e2e/cypress.json",
+            "devServerTarget": "herbalife-blog:serve",
+            "tsConfig": "apps/herbalife-blog-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "herbalife-blog:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/herbalife-blog-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "herbalife-blog"
+}
