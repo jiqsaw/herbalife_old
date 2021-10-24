@@ -29,10 +29,6 @@
   "projects": {
     "herbalife-blog": {
       "tags": []
-    },
-    "herbalife-blog-e2e": {
-      "tags": [],
-      "implicitDependencies": ["herbalife-blog"]
     }
   }
 }
